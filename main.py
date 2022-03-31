@@ -12,8 +12,7 @@ from functools import wraps
 import os
 
 app = Flask(__name__)
-# app.config['SECRET_KEY'] = os.urandom(12).hex()
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 ##LOGIN CONFIGURATION
@@ -31,7 +30,7 @@ gravatar = Gravatar(app,
 
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
